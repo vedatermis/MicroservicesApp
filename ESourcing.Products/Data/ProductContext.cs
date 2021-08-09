@@ -13,6 +13,7 @@ namespace ESourcing.Products.Data
             IMongoDatabase database = client.GetDatabase(productDatabaseSettings.DatabaseName);
 
             Products = database.GetCollection<Product>(productDatabaseSettings.CollectionName);
+            ProductContextSeed.SeedData(Products);
         }
 
         public IMongoCollection<Product> Products { get; }
