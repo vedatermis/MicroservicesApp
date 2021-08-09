@@ -1,8 +1,12 @@
+using ESourcing.Sourcing.Data;
+using ESourcing.Sourcing.Data.Interface;
+using ESourcing.Sourcing.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 namespace ESourcing.Sourcing
@@ -21,6 +25,12 @@ namespace ESourcing.Sourcing
         {
 
             services.AddControllers();
+
+            services.Configure<SourcingDatabaseSettings>(Configuration.GetSection(nameof(SourcingDatabaseSettings)));
+            
+            services.AddSingleton<ISourcingDatabaseSettings>(c => c.GetRequiredService<IOptions<SourcingDatabaseSettings>>().Value);
+            services.AddTransient<ISourcingContext, SourcingContext>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ESourcing.Sourcing", Version = "v1" });
