@@ -1,5 +1,7 @@
 using ESourcing.Sourcing.Data;
 using ESourcing.Sourcing.Data.Interface;
+using ESourcing.Sourcing.Repositories;
+using ESourcing.Sourcing.Repositories.Interfaces;
 using ESourcing.Sourcing.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +32,8 @@ namespace ESourcing.Sourcing
             
             services.AddSingleton<ISourcingDatabaseSettings>(c => c.GetRequiredService<IOptions<SourcingDatabaseSettings>>().Value);
             services.AddTransient<ISourcingContext, SourcingContext>();
+            services.AddTransient<IAuctionRepository, AuctionRepository>();
+            services.AddTransient<IBidRepository, BidRepository>();
 
             services.AddSwaggerGen(c =>
             {
