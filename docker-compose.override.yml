@@ -9,6 +9,13 @@ services:
     ports:
         - "27017:27017"
 
+  rabbitmqmsapp:
+    container_name: rabbitmqmsapp
+    restart: always
+    ports:
+        - "5672:5672"
+        - "15672:15672"
+
   esourcing.products:
     container_name: esourcingproducts
     environment:
@@ -29,8 +36,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "SourcingDatabaseSettings:ConnectionString=mongodb://sourcingdb:27017"
+      - "EventBus:HostName=rabbitmqmsapp"
     depends_on:
       - sourcingdb
+      - rabbitmqmsapp
     volumes:
       - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets      
       - ${HOME}/.aspnet/https:/root/.aspnet/https/

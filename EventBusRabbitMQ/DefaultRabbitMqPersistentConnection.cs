@@ -18,7 +18,7 @@ namespace EventBusRabbitMQ
         private readonly ILogger<DefaultRabbitMqPersistentConnection> _logger;
         private bool _disposed;
 
-        public DefaultRabbitMqPersistentConnection(IConnectionFactory connectionFactory, IConnection connection, int retryCount, ILogger<DefaultRabbitMqPersistentConnection> logger)
+        public DefaultRabbitMqPersistentConnection(IConnectionFactory connectionFactory, int retryCount, ILogger<DefaultRabbitMqPersistentConnection> logger)
         {
             _connectionFactory = connectionFactory;
             _retryCount = retryCount;
