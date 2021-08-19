@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModel\" />
+    <ProjectReference Include="..\ESourcing.Infrastructure\ESourcing.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
