@@ -71,7 +71,7 @@ namespace Esourcing.UI.Clients
             var dataAsString = JsonConvert.SerializeObject(id);
             var content = new StringContent(dataAsString);
             content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-            var response = await _client.PostAsync("/Auction/CompleteAuction", content);
+            var response = await _client.PostAsync("/Auction/CompleteAuction/", content);
             if (response.IsSuccessStatusCode)
             {
                 var responseData = await response.Content.ReadAsStringAsync();
